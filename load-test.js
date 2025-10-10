@@ -4,22 +4,20 @@ import { randomItem, randomString, randomIntBetween } from 'https://jslib.k6.io/
 
 export const options = {
   stages: [
-    { duration: '5s', target: 50 },
-    { duration: '5s', target: 50 },
-    { duration: '10s', target: 100 },
-    { duration: '10s', target: 100 },
+    { duration: '5s', target: 150 },
     { duration: '15s', target: 250 },
+    { duration: '25s', target: 325 },
+    { duration: '15s', target: 325 },
+    { duration: '30s', target: 400 },
+    { duration: '30s', target: 400 },
+    { duration: '15s', target: 325 },
+    { duration: '25s', target: 325 },
     { duration: '15s', target: 250 },
-    { duration: '25s', target: 300 },
-    { duration: '15s', target: 300 },
-    { duration: '25s', target: 350 },
-    { duration: '15s', target: 350 },
-    { duration: '25s', target: 430 },
-    { duration: '15s', target: 430 },
+    { duration: '5s', target: 150 }
   ],
   thresholds: {
-    checks: ['rate>0.90'],
-    http_req_duration: ['p(90)<150'],
+    checks: ['rate>0.95'],
+    http_req_duration: ['p(95)<85'],
   },  
 };
 
@@ -90,7 +88,7 @@ export default function () {
         });
         check(res, { 
           'GET /persons/:t=alias valid status': (r) => [200, 404, 400, 422].includes(r.status),
-          'GET /persons/:t=alias response time < 150ms': (r) => r.timings.duration < 150
+          'GET /persons/:t=alias response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       case 2:
@@ -99,7 +97,7 @@ export default function () {
         });
         check(res, { 
           'GET /persons/:o=alias&pg&sz valid status': (r) => [200, 404, 400, 422].includes(r.status),
-          'GET /persons/:o=alias&pg&sz response time < 150ms': (r) => r.timings.duration < 150
+          'GET /persons/:o=alias&pg&sz response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       case 3:
@@ -108,7 +106,7 @@ export default function () {
         });
         check(res, { 
           'GET /persons/:t=a&o=Birthdate&pg=1&sz valid status': (r) => [200, 404, 400, 422].includes(r.status),
-          'GET /persons/:t=a&o=Birthdate&pg=1&sz response time < 150ms': (r) => r.timings.duration < 150
+          'GET /persons/:t=a&o=Birthdate&pg=1&sz response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       case 4:
@@ -118,7 +116,7 @@ export default function () {
         });
         check(res, { 
           'GET /persons/:id valid status': (r) => [200, 404, 400, 422].includes(r.status),
-          'GET /persons/:id response time < 150ms': (r) => r.timings.duration < 150
+          'GET /persons/:id response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
     }
@@ -132,7 +130,7 @@ export default function () {
         });
         check(res, { 
           'POST /persons valid status': (r) =>  [201, 404, 400, 422].includes(r.status),
-          'POST /persons response time < 150ms': (r) => r.timings.duration < 150
+          'POST /persons response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       case type < 0.5:
@@ -144,7 +142,7 @@ export default function () {
         });
         check(res, { 
           'POST /persons/batch valid status': (r) => [201, 404, 400, 422].includes(r.status),
-          'POST /persons/batch response time < 150ms': (r) => r.timings.duration < 150
+          'POST /persons/batch response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       case type < 0.9:
@@ -155,7 +153,7 @@ export default function () {
         });
         check(res, {
           'PUT /persons valid status': (r) => [200, 404, 400, 422].includes(r.status),
-          'PUT /persons response time < 150ms': (r) => r.timings.duration < 150
+          'PUT /persons response time < 85ms': (r) => r.timings.duration < 85
         });
         break;
       default:
@@ -166,7 +164,7 @@ export default function () {
           });
           check(res, { 
             'DELETE /persons/:id valid status': (r) => [200, 404, 400, 422].includes(r.status),
-            'DELETE /persons/:id response time < 150ms': (r) => r.timings.duration < 150
+            'DELETE /persons/:id response time < 85ms': (r) => r.timings.duration < 85
           });        
         }
         break;
