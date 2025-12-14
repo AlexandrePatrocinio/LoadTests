@@ -5,14 +5,14 @@ import { randomItem, randomString, randomIntBetween } from 'https://jslib.k6.io/
 export const options = {
   stages: [
     { duration: '10s', target: 10 },
-    { duration: '15s', target: 50 },
-    { duration: '25s', target: 75 },
-    { duration: '10s', target: 100 },
-    { duration: '30s', target: 150 },
-    { duration: '30s', target: 150 },
-    { duration: '10s', target: 100 },
-    { duration: '25s', target: 75 },
-    { duration: '15s', target: 50 },
+    { duration: '20s', target: 50 },
+    { duration: '20s', target: 75 },
+    { duration: '20s', target: 100 },
+    { duration: '20s', target: 150 },
+    { duration: '20s', target: 150 },
+    { duration: '20s', target: 100 },
+    { duration: '20s', target: 75 },
+    { duration: '20s', target: 50 },
     { duration: '10s', target: 10 }
   ],
   thresholds: {
